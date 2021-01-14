@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>v-bind</title>
+</head>
+<body>
+<div id="app">
+    <img :src="imgSrc"  width="200px">
+</div>
+</body>
+<script>
+    var app=new Vue({
+        el:'#app',
+        data:{
+            imgSrc: 'https://newimg.jspang.com/myqrCode.jpg',
+        }
+    })
+</script>
+</html>
