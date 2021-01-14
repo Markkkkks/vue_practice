@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue.set</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<div id="app1">
+    <p>外部数据，非数组</p>
+    <p>{{num.count}}</p>
+    <button onclick="add1()">增加1</button>
+    <button onclick="add2()">增加2</button>
+    <button onclick="add3()">增加3</button>
+    <hr>
+</div>
+<div id="app2">
+    <p>外部数据，非数组</p>
+    <ul>
+        <li v-for="item in innerArray">
+            {{item}}
+        </li>
+    </ul>
+    <button onclick="add4()">增加4</button>
+    <button onclick="modify()">修改数组</button>
+    <button onclick="modify2()">修改数组 by set</button>
+    <hr>
+</div>
+</body>
+<script>
+<!--解决数组问题-->
+    var outData = {
+        count:1,
+        goodName:'car'
+    };
+    function add1(){
+        outData.count++;
+        alert("vue外数据" + outData.count);
+        alert("vue内数据" + app.num.count);
+    }
+    function add2(){
+        app.num.count++;
+        alert("vue外数据" + outData.count);
+        alert("vue内数据" + app.num.count);
+    }
+    function add3(){
+        Vue.set(outData,'count',4);
+        alert("vue外数据" + outData.count);
+        alert("vue内数据" + app.num.count);
+    }
+
+    var outArray = ['attr1', 'attr2', 'attr3'];
+    function add4() {
+        outArray.push('attr4');
+        alert("vue外数据" + outArray.toString());
+        alert("vue内数据" + app2.innerArray.toString());
+    }
+
+    function modify() {
+        outArray[0] = 'modified';
+        alert("vue外数据" + outArray.toString());
+        alert("vue内数据" + app2.innerArray.toString());
+    }
+    function modify2() {
+        Vue.set(outArray, 0, 'modified');
+        alert("vue外数据" + outArray.toString());
+        alert("vue内数据" + app2.innerArray.toString());
+    }
+    var app1 = new Vue({
+        el: '#app1',
+        data: {
+            num: outData
+        },
+    })
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            innerArray: outArray
+        },
+    })
+
+</script>
+</html>

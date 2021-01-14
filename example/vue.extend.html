@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue.extend</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <author></author>
+</div>
+</body>
+<script>
+    var authorValue = Vue.extend({
+        template: "<p><a :href='authorUrl'>{{authorName}}</a></p>",
+        data:function(){
+            return{
+                authorName:'JSPang',
+                authorUrl:'http://www.jspang.com'
+            }
+        }
+    })
+    new authorValue().$mount('author');
+
+</script>
+</html>

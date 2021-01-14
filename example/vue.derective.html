@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue.derective</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-jspang="color1" id="demo1">
+        {{num}}
+    </div>
+    <div v-baobo="color2" id="demo2">
+        {{num}}
+    </div>
+    <div>
+        <button @click="add">Add</button>
+    </div>
+</div>
+</body>
+<script>
+    Vue.directive('jspang',function(el,binding,vnode){
+        el.style='color:'+binding.value;
+    });
+    Vue.directive('baobo', {
+        bind: function () {//被绑定
+            console.log('1 - bind');
+        },
+        inserted: function (el,binding) {//绑定到节点
+            console.log('2 - inserted');
+            el.style='color:'+binding.value;
+        },
+        update: function () {//组件更新
+            console.log('3 - update');
+        },
+        componentUpdated: function () {//组件更新完成
+            console.log('4 - componentUpdated');
+        },
+        unbind: function () {//解绑
+            console.log('1 - bind');
+        }
+    });
+    var app = new Vue({
+        el: '#app',
+        data: {
+            num: 10,
+            color1: 'blue',
+            color2: 'red'
+        },
+        methods: {
+            add: function () {
+                this.num++;
+            }
+        }
+    })
+
+</script>
+</html>
