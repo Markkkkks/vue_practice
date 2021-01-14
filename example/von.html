@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+    <title>v-on事件监听器</title>
+</head>
+<body>
+<h1>v-on 事件监听器</h1>
+<hr>
+<div id="app">
+    本场比赛得分： {{count}}<br/>
+    <div v-if="count>5">
+        <h5>本场成绩优秀</h5>
+    </div>
+    <div v-else>
+        <h5>本场成绩不优秀</h5>
+    </div>
+    <button v-on:click="jiafen">加分</button>
+    <button v-on:click="jianfen">减分</button>
+
+</div>
+
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            count: 1
+        },
+        methods: {
+            jiafen: function () {
+                this.count++;
+            },
+            jianfen: function () {
+                this.count--;
+            }
+        }
+    })
+</script>
+</body>
+</html>
