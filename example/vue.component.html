@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelloWorld</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>vue component</h1>
+    <div><span>输入todo</span><input type="text" v-model="toDoValue" placeholder="请输入todo">
+        <button @click="submitToDo">提交</button>
+    </div>
+    <list-component v-for = "(item,index) in list"
+                    v-bind:context="item"
+                    v-bind:index="index"
+                    @delete="handleDeleteItem">
+
+    </list-component>
+    <br/>
+    <hr>
+    <div>
+        {{message}}
+    </div>
+</div>
+<script type="text/javascript">
+    var ListComponent = {
+        props: ['context', 'index'],
+        template: '<li @click="handleClick">{{context}} - {{index}}</li>',
+        methods: {
+            handleClick: function () {
+                this.$emit("delete",this.index);
+            }
+        }
+    }
+    var app = new Vue({
+        el: '#app',
+        components:{
+            ListComponent :ListComponent
+        },
+        data: {
+            message: 'hello world!',
+            list: [],
+            toDoValue: null
+        },
+        methods: {
+            submitToDo: function () {
+                console.log("提交内容")
+                this.list.push(this.toDoValue)
+                console.log(this.list)
+                this.toDoValue = ""
+            },
+            handleDeleteItem: function (index){
+                console.log("delete 父组件触发"+index);
+                alert("delete 父组件触发");
+                this.list.splice(index, 1);
+            }
+
+        }
+    })
+</script>
+</body>
+</html>
